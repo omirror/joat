@@ -1,0 +1,17 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "go_default_library",
+    srcs = [
+        "filesystem.go",
+        "json.go",
+        "uuid.go",
+        "validation.go",
+    ],
+    importpath = "github.com/ubiqueworks/joat/util",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//vendor/github.com/json-iterator/go:go_default_library",
+        "//vendor/github.com/satori/go.uuid:go_default_library",
+    ],
+)

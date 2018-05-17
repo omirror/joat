@@ -1,0 +1,4 @@
+build --workspace_status_command="bash ./workspace-status.sh"
+build --color=yes
+build --features=pure
+build --verbose_failures

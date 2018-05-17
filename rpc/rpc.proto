@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+package rpc;
+
+import "google/protobuf/timestamp.proto";
+
+service ControllerService {
+    rpc Join (JoinRequest) returns (JoinResponse) {}
+    rpc Leave (LeaveRequest) returns (LeaveResponse) {}
+}
+
+service WorkerService {
+//    rpc Join (JoinRequest) returns (JoinResponse) {}
+//    rpc Leave (LeaveRequest) returns (LeaveResponse) {}
+}
+
+//message User {
+//    google.protobuf.Timestamp createdAt = 1;
+//    google.protobuf.Timestamp updatedAt = 2;
+//    string ID = 3;
+//    string name = 4;
+//    string email = 5;
+//    string locale = 6;
+//    bool isAdmin = 7;
+//    bool isLocked = 8;
+//    bool isPasswordSet = 9;
+//    bool isVerified = 10;
+//}
+
+message JoinRequest {
+    string workerId = 1;
+    string addr = 2;
+    string port = 3;
+}
+
+message JoinResponse {
+
+}
+
+message LeaveRequest {
+    string workerId = 1;
+}
+
+message LeaveResponse {
+
+}

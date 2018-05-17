@@ -1,0 +1,20 @@
+version: '3.6'
+services:
+  controller:
+    image: ubiqueworks/joat:0.1.0
+    command: ["-d", "controller", "--data-dir", "/data"]
+    expose:
+      - 7080
+      - 8080
+      - 9080
+    ports:
+      - 8080:8080
+  worker:
+    image: ubiqueworks/joat:0.1.0
+    command: ["-d", "worker", "--data-dir", "/data", "--join", "controller:7080"]
+    expose:
+      - 7080
+      - 8080
+      - 9080
+    depends_on:
+      - controller
