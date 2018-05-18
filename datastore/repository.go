@@ -4,13 +4,13 @@ import (
 	"github.com/asdine/storm"
 )
 
-func newAuthRepository(db Bucket) AuthRepository {
-	return &repository{db: db}
+func NewUserRepository(db Bucket) UserRepository {
+	return &userRepository{db: db}
 }
 
-type AuthRepository interface {
+type UserRepository interface {
 }
 
-type repository struct {
+type userRepository struct {
 	db storm.Node
 }

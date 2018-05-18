@@ -59,4 +59,4 @@ func (s *stormStore) Bucket(name string) Bucket {
 /*
 	What time doors opens?
 	Is it allowed to bring food/beverages?
- */
+*/

@@ -5,6 +5,7 @@ go_library(
     srcs = [
         "db.go",
         "model.go",
+        "repository.go",
     ],
     importpath = "github.com/ubiqueworks/joat/datastore",
     visibility = ["//visibility:public"],

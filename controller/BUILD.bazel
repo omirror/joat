@@ -5,7 +5,6 @@ go_library(
     srcs = [
         "controller.go",
         "http.go",
-        "repository.go",
         "rpc.go",
     ],
     importpath = "github.com/ubiqueworks/joat/controller",
@@ -15,7 +14,6 @@ go_library(
         "//datastore:go_default_library",
         "//rpc:go_default_library",
         "//util:go_default_library",
-        "//vendor/github.com/asdine/storm:go_default_library",
         "//vendor/github.com/go-chi/chi:go_default_library",
         "//vendor/github.com/go-chi/chi/middleware:go_default_library",
         "//vendor/github.com/rs/zerolog/log:go_default_library",

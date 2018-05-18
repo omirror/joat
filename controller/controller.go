@@ -17,6 +17,10 @@ import (
 	"google.golang.org/grpc"
 )
 
+const (
+	bucketName = "controller"
+)
+
 type Config struct {
 	AdvertiseIP *net.IP
 	ClusterAddr *net.TCPAddr
@@ -37,19 +41,22 @@ func StartController(conf *Config) error {
 type controller struct {
 	config         *Config
 	clusterManager cluster.Manager
-	repo           *repository
-	store          datastore.Store
+	userRepo       datastore.UserRepository
+	db             datastore.Bucket
 	shutdownLock   sync.Mutex
 	shutdownCh     chan struct{}
 	shutdown       bool
 }
 
 func (c *controller) start() error {
-	if dbStore, err := datastore.NewStore(&datastore.Config{DataDir: c.config.DataDir}); err != nil {
+	dbStore, err := datastore.NewStore(&datastore.Config{DataDir: c.config.DataDir})
+	if err != nil {
+		log.Error().Err(err).Msg("error initializing datastore")
 		return err
-	} else {
-		c.store = dbStore
 	}
+
+	c.db = dbStore.Bucket(bucketName)
+	c.userRepo = datastore.NewUserRepository(c.db)
 
 	errCh := make(chan error)
 	shutdownCh := c.shutdownCh

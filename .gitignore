@@ -1,4 +1,5 @@
 *.pb.go
 .idea/
 bazel-*
+node_modules/
 vendor/
