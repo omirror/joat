@@ -1,4 +1,4 @@
-package store
+package datastore
 
 import (
 	"fmt"
@@ -6,16 +6,20 @@ import (
 
 	"github.com/asdine/storm"
 	"github.com/rs/zerolog/log"
+	"github.com/ubiqueworks/joat/datastore/codec"
 	"github.com/ubiqueworks/joat/util"
-	"github.com/ubiqueworks/joat/store/codec"
 )
 
 type Config struct {
 	DataDir string
 }
 
+type Bucket interface {
+	storm.Node
+}
+
 func NewStore(conf *Config) (Store, error) {
-	stormStore := &stormStore{dataDir:conf.DataDir}
+	stormStore := &stormStore{dataDir: conf.DataDir}
 	if err := stormStore.initialize(); err != nil {
 		return nil, err
 	}
@@ -23,7 +27,7 @@ func NewStore(conf *Config) (Store, error) {
 }
 
 type Store interface {
-	Bucket(name string) storm.Node
+	Bucket(name string) Bucket
 }
 
 type stormStore struct {
@@ -33,7 +37,9 @@ type stormStore struct {
 
 func (s *stormStore) initialize() error {
 	dbPath := filepath.Join(s.dataDir, "db", "joat.db")
-	if err := util.EnsurePath(dbPath, true); err != nil {
+	log.Info().Msgf("Initializing datastore: %s", dbPath)
+
+	if err := util.EnsurePath(dbPath, false); err != nil {
 		log.Error().Err(err).Msgf("error creating database directory")
 		return fmt.Errorf("error creating database directory: %s", filepath.Dir(dbPath))
 	}
@@ -46,6 +52,11 @@ func (s *stormStore) initialize() error {
 	return nil
 }
 
-func (s *stormStore) Bucket(name string) storm.Node {
+func (s *stormStore) Bucket(name string) Bucket {
 	return s.db.From(name)
 }
+
+/*
+	What time doors opens?
+	Is it allowed to bring food/beverages?
+ */

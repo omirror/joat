@@ -1,0 +1,17 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "go_default_library",
+    srcs = [
+        "db.go",
+        "model.go",
+    ],
+    importpath = "github.com/ubiqueworks/joat/datastore",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//datastore/codec:go_default_library",
+        "//util:go_default_library",
+        "//vendor/github.com/asdine/storm:go_default_library",
+        "//vendor/github.com/rs/zerolog/log:go_default_library",
+    ],
+)

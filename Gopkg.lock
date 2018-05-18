@@ -27,12 +27,6 @@
   version = "v2.1.1"
 
 [[projects]]
-  name = "github.com/boltdb/bolt"
-  packages = ["."]
-  revision = "2f1ce7a837dcb8da3ec595b1dac9d0632f0f99e8"
-  version = "v1.3.1"
-
-[[projects]]
   name = "github.com/coreos/bbolt"
   packages = ["."]
   revision = "583e8937c61f1af6513608ccc75c97b6abdf4ff9"
@@ -310,6 +304,8 @@
   branch = "master"
   name = "golang.org/x/crypto"
   packages = [
+    "bcrypt",
+    "blowfish",
     "ed25519",
     "ed25519/internal/edwards25519"
   ]
@@ -413,6 +409,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "f8dc2f07d574443db04c7a43f1c36aff45f15ebf27e1ed3916179b8902630b5c"
+  inputs-digest = "613cc173681484190d3e461d50659cdc7ae64eb56b94068dd04fb2adf9952c4d"
   solver-name = "gps-cdcl"
   solver-version = 1

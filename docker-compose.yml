@@ -9,12 +9,20 @@ services:
       - 9080
     ports:
       - 8080:8080
+      - 9080:9080
+    volumes:
+      - controller-data:/data
   worker:
     image: ubiqueworks/joat:0.1.0
     command: ["-d", "worker", "--data-dir", "/data", "--join", "controller:7080"]
+    depends_on:
+      - controller
     expose:
       - 7080
       - 8080
       - 9080
-    depends_on:
-      - controller
+    volumes:
+      - worker-data:/data
+volumes:
+  controller-data:
+  worker-data:

@@ -12,6 +12,7 @@ import (
 
 	"github.com/rs/zerolog/log"
 	"github.com/ubiqueworks/joat/cluster"
+	"github.com/ubiqueworks/joat/datastore"
 	"github.com/ubiqueworks/joat/rpc"
 	"google.golang.org/grpc"
 )
@@ -36,12 +37,20 @@ func StartController(conf *Config) error {
 type controller struct {
 	config         *Config
 	clusterManager cluster.Manager
+	repo           *repository
+	store          datastore.Store
 	shutdownLock   sync.Mutex
 	shutdownCh     chan struct{}
 	shutdown       bool
 }
 
 func (c *controller) start() error {
+	if dbStore, err := datastore.NewStore(&datastore.Config{DataDir: c.config.DataDir}); err != nil {
+		return err
+	} else {
+		c.store = dbStore
+	}
+
 	errCh := make(chan error)
 	shutdownCh := c.shutdownCh
 

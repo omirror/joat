@@ -5,4 +5,8 @@ go_library(
     srcs = ["plugin.go"],
     importpath = "github.com/ubiqueworks/joat/plugin",
     visibility = ["//visibility:public"],
+    deps = [
+        "//vendor/github.com/asdine/storm:go_default_library",
+        "//vendor/github.com/rs/zerolog:go_default_library",
+    ],
 )

@@ -14,16 +14,6 @@ import (
 )
 
 func init() {
-	rootCmd.AddCommand(workerCmd)
-}
-
-var workerCmd = &cobra.Command{
-	Use:   "worker",
-	Short: "Start a worker instance",
-	RunE:  workerRun,
-}
-
-func init() {
 	workerCmd.Flags().String(flagAdvertiseAddr, "", flagAdvertiseAddrDesc)
 	workerCmd.Flags().String(flagBindAddr, defaultBindAddr, flagBindAddrDesc)
 	workerCmd.Flags().Int(flagClusterPort, defaultClusterPort, flagClusterPortDesc)
@@ -32,6 +22,12 @@ func init() {
 	workerCmd.Flags().Int(flagRpcPort, defaultRpcPort, flagRpcPortDesc)
 	workerCmd.MarkFlagRequired(flagJoin)
 	rootCmd.AddCommand(workerCmd)
+}
+
+var workerCmd = &cobra.Command{
+	Use:   "worker",
+	Short: "Start a worker instance",
+	RunE:  workerRun,
 }
 
 func workerRun(_ *cobra.Command, _ []string) error {

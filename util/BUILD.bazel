@@ -3,6 +3,7 @@ load("@io_bazel_rules_go//go:def.bzl", "go_library")
 go_library(
     name = "go_default_library",
     srcs = [
+        "crypto.go",
         "filesystem.go",
         "json.go",
         "uuid.go",
@@ -13,5 +14,6 @@ go_library(
     deps = [
         "//vendor/github.com/json-iterator/go:go_default_library",
         "//vendor/github.com/satori/go.uuid:go_default_library",
+        "//vendor/golang.org/x/crypto/bcrypt:go_default_library",
     ],
 )

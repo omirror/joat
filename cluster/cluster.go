@@ -191,8 +191,7 @@ func (m *serfClusterManager) ensureMemberID() error {
 		}
 		m.memberID = string(data)
 	} else {
-		// Generate a new Node ID
-		memberID := fmt.Sprintf("%s-%s", m.role, util.NewUUID())
+		memberID := fmt.Sprintf("%s-%s", m.role, util.RandomHexString(8))
 		if err := ioutil.WriteFile(memberIDFilePath, []byte(memberID), 0644); err != nil {
 			return err
 		}

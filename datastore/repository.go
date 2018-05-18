@@ -1,14 +1,14 @@
-package controller
+package datastore
 
 import (
 	"github.com/asdine/storm"
 )
 
-func newRepository(db storm.Node) Repository {
+func newAuthRepository(db Bucket) AuthRepository {
 	return &repository{db: db}
 }
 
-type Repository interface {
+type AuthRepository interface {
 }
 
 type repository struct {
