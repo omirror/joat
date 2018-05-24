@@ -11,9 +11,9 @@ import (
 	"time"
 
 	"github.com/rs/zerolog/log"
-	"github.com/ubiqueworks/joat/cluster"
-	"github.com/ubiqueworks/joat/datastore"
-	"github.com/ubiqueworks/joat/rpc"
+	"github.com/ubiqueworks/joat/internal/cluster"
+	"github.com/ubiqueworks/joat/internal/datastore"
+	"github.com/ubiqueworks/joat/internal/rpc"
 	"google.golang.org/grpc"
 )
 

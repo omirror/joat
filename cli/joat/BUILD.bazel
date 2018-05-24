@@ -6,7 +6,9 @@ go_library(
     srcs = ["main.go"],
     importpath = "github.com/ubiqueworks/joat/cli/joat",
     visibility = ["//visibility:public"],
-    deps = ["//cmd:go_default_library"],
+    deps = [
+        "//cli/cmd:go_default_library",
+    ],
 )
 
 go_binary(

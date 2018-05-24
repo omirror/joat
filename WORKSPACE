@@ -2,25 +2,6 @@ workspace(name = "joat")
 
 load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
 
-git_repository(
-    name = "build_bazel_rules_nodejs",
-    remote = "https://github.com/bazelbuild/rules_nodejs.git",
-    tag = "0.9.1",
-)
-
-load("@build_bazel_rules_nodejs//:defs.bzl", "node_repositories", "yarn_install")
-
-yarn_install(
-    name = "build_bazel_rules_nodejs_managed_deps",
-    package_json = "//:package.json",
-    yarn_lock = "//:yarn.lock",
-)
-
-node_repositories(
-    package_json = ["//:package.json"],
-    preserve_symlinks = True,
-)
-
 http_archive(
     name = "io_bazel_rules_go",
     url = "https://github.com/bazelbuild/rules_go/releases/download/0.12.0/rules_go-0.12.0.tar.gz",
@@ -39,6 +20,12 @@ git_repository(
     tag = "v0.4.0",
 )
 
+git_repository(
+    name = "build_bazel_rules_nodejs",
+    remote = "https://github.com/bazelbuild/rules_nodejs.git",
+    tag = "0.9.1",
+)
+
 load("@io_bazel_rules_go//go:def.bzl", "go_rules_dependencies", "go_register_toolchains")
 
 go_rules_dependencies()
@@ -55,28 +42,3 @@ go_image_repositories()
 load("@bazel_gazelle//:deps.bzl", "gazelle_dependencies")
 
 gazelle_dependencies()
-
-git_repository(
-    name = "io_bazel_rules_webtesting",
-    remote = "https://github.com/bazelbuild/rules_webtesting.git",
-    commit = "ca7b8062d9cf4ef2fde9193c7d37a0764c4262d7",
-)
-
-load("@io_bazel_rules_webtesting//web:repositories.bzl", "browser_repositories", "web_test_repositories")
-
-web_test_repositories()
-
-browser_repositories(
-    chromium = True,
-    firefox = True,
-)
-
-git_repository(
-    name = "build_bazel_rules_typescript",
-    remote = "https://github.com/bazelbuild/rules_typescript.git",
-    tag = "0.14.0",
-)
-
-load("@build_bazel_rules_typescript//:defs.bzl", "ts_setup_workspace")
-
-ts_setup_workspace()

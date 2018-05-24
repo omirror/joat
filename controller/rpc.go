@@ -3,7 +3,7 @@ package controller
 import (
 	"context"
 
-	"github.com/ubiqueworks/joat/rpc"
+	"github.com/ubiqueworks/joat/internal/rpc"
 )
 
 func newRpcServer(controller *controller) *rpcServer {

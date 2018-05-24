@@ -1,0 +1,12 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "go_default_library",
+    srcs = ["httpio.go"],
+    importpath = "github.com/ubiqueworks/joat/internal/util/httpio",
+    visibility = ["//:__subpackages__"],
+    deps = [
+        "//internal/util/jsonx:go_default_library",
+        "//vendor/github.com/rs/zerolog/log:go_default_library",
+    ],
+)

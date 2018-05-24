@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/ubiqueworks/joat/cmd"
+	"github.com/ubiqueworks/joat/cli/cmd"
 )
 
 var (

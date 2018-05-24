@@ -1,17 +1,16 @@
 package worker
 
 import (
-	"sync"
-
 	"net"
 	"os"
 	"os/signal"
+	"sync"
 	"syscall"
 
 	_ "github.com/docker/docker/client"
 	"github.com/rs/zerolog/log"
-	"github.com/ubiqueworks/joat/cluster"
-	"github.com/ubiqueworks/joat/rpc"
+	"github.com/ubiqueworks/joat/internal/cluster"
+	"github.com/ubiqueworks/joat/internal/rpc"
 	"google.golang.org/grpc"
 )
 

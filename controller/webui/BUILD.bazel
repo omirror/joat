@@ -1,0 +1,87 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+load("@io_bazel_rules_go//extras:bindata.bzl", "bindata")
+
+# gazelle:exclude assets_stub.go
+
+bindata(
+    name = "embed",
+    srcs = glob([
+        "dist/**/*.*",
+    ]),
+    extra_args = [
+        "-prefix",
+        "webui/dist/",
+    ],
+    package = "webui",
+    visibility = ["//visibility:public"],
+)
+
+# keep
+go_library(
+    name = "go_default_library",
+    srcs = [":embed"],
+    importpath = "github.com/ubiqueworks/joat/webui",
+    visibility = ["//visibility:public"],
+)
+
+# load("//_build/rules:vue.bzl", "vue_bundle")
+#
+# exports_files(["package.json"])
+#
+# filegroup(
+#     name = "library",
+#     srcs = glob([
+#         "public/**/*.ico",
+#         "public/**/*.html",
+#         "src/**/*.ts",
+#         "src/**/*.vue",
+#     ]),
+# )
+#
+# vue_bundle(
+#     name = "bundle",
+#     srcs = [":library"],
+#     # node_modules = ":node_modules",
+# )
+
+# webui_build(
+#     name = "build",
+#     # srcs = [":sources"],
+#     # package_json = ":package.json",
+#     # yarn_lock = ":yarn.lock",
+# )
+#
+# webui_serve(
+#     name = "serve",
+# )
+
+# load("@bazel_gazelle//:def.bzl", "gazelle")
+# load("@io_bazel_rules_docker//container:container.bzl", "container_bundle")
+#
+# # gazelle:exclude node_modules
+#
+# gazelle(
+#     name = "gazelle",
+#     command = "fix",
+#     external = "vendored",
+#     prefix = "github.com/ubiqueworks/joat",
+# )
+#
+# container_bundle(
+#     name = "package",
+#     images = {
+#         "ubiqueworks/joat:{APP_VERSION}": "//cli/joat:docker-image",
+#     },
+#     stamp = True,
+# )
+#
+# # NOTE: this will move to node_modules/BUILD in a later release
+# filegroup(
+#     name = "node_modules",
+#     srcs = glob([
+#         "node_modules/**/*.js",
+#         "node_modules/**/*.d.ts",
+#         "node_modules/**/*.json",
+#     ]),
+#     visibility = ["//visibility:public"],
+# )

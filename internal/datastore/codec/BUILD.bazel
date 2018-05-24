@@ -1,0 +1,9 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "go_default_library",
+    srcs = ["jsoniter.go"],
+    importpath = "github.com/ubiqueworks/joat/internal/datastore/codec",
+    visibility = ["//visibility:public"],
+    deps = ["//vendor/github.com/json-iterator/go:go_default_library"],
+)

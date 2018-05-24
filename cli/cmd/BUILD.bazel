@@ -1,0 +1,28 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "go_default_library",
+    srcs = [
+        "config.go",
+        "config_set.go",
+        "const.go",
+        "controller.go",
+        "initialize.go",
+        "root.go",
+        "version.go",
+        "worker.go",
+    ],
+    importpath = "github.com/ubiqueworks/joat/cli/cmd",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//controller:go_default_library",
+        "//internal/util/validate:go_default_library",
+        "//vendor/github.com/hashicorp/go-sockaddr/template:go_default_library",
+        "//vendor/github.com/mitchellh/go-homedir:go_default_library",
+        "//vendor/github.com/rs/zerolog:go_default_library",
+        "//vendor/github.com/rs/zerolog/log:go_default_library",
+        "//vendor/github.com/spf13/cobra:go_default_library",
+        "//vendor/github.com/spf13/viper:go_default_library",
+        "//worker:go_default_library",
+    ],
+)

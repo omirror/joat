@@ -3,6 +3,12 @@ load("@io_bazel_rules_docker//container:container.bzl", "container_bundle")
 
 # gazelle:exclude node_modules
 
+filegroup(
+    name = "node_modules",
+    srcs = glob(["node_modules/**/*"]),
+    visibility = ["//visibility:public"],
+)
+
 gazelle(
     name = "gazelle",
     command = "fix",
@@ -16,15 +22,4 @@ container_bundle(
         "ubiqueworks/joat:{APP_VERSION}": "//cli/joat:docker-image",
     },
     stamp = True,
-)
-
-# NOTE: this will move to node_modules/BUILD in a later release
-filegroup(
-    name = "node_modules",
-    srcs = glob([
-        "node_modules/**/*.js",
-        "node_modules/**/*.d.ts",
-        "node_modules/**/*.json",
-    ]),
-    visibility = ["//visibility:public"],
 )
